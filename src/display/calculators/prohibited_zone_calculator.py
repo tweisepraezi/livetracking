@@ -5,7 +5,7 @@ from typing import List, Optional
 
 from display.calculators.calculator import Calculator
 from display.calculators.calculator_utilities import PolygonHelper, get_shortest_intersection_time
-from display.calculators.positions_and_gates import  Gate
+from display.calculators.positions_and_gates import Gate
 from display.calculators.update_score_message import UpdateScoreMessage
 from display.models import Contestant, Scorecard, Route
 from display.models.contestant_utility_models import ContestantReceivedPosition
@@ -70,7 +70,11 @@ class ProhibitedZoneCalculator(Calculator):
             return self._calculate_danger_level(track), sum([0] + list(self.running_penalty.values()))
 
     def calculate_enroute(
-        self, track: List[ContestantReceivedPosition], last_gate: "Gate", in_range_of_gate: "Gate", next_gate: Optional["Gate"]
+        self,
+        track: List[ContestantReceivedPosition],
+        last_gate: "Gate",
+        in_range_of_gate: "Gate",
+        next_gate: Optional["Gate"],
     ):
         self.check_inside_prohibited_zone(track, last_gate)
 
@@ -100,6 +104,7 @@ class ProhibitedZoneCalculator(Calculator):
                         position.longitude,
                         "anomaly",
                         self.INSIDE_PROHIBITED_ZONE_PENALTY_TYPE,
+                        maximum_score=self.scorecard.prohibited_zone_maximum,
                     )
                 )
         for zone in list(self.inside_zones.keys()):
