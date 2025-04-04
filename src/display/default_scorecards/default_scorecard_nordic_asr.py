@@ -20,9 +20,8 @@ from display.utilities.navigation_task_type_definitions import AIRSPORTS
 
 
 def get_default_scorecard():
-    Scorecard.objects.filter(name="nordicasr").update(name="Nordic Air Sports Race")
     scorecard, created = Scorecard.objects.update_or_create(
-        name="Air Sports Race",
+        name="Nordic Air Sports Race",
         defaults={
             "shortcut_name": "Nordic Air Sports Race",
             "valid_from": datetime.datetime(2025, 1, 1, tzinfo=datetime.timezone.utc),
