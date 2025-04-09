@@ -191,6 +191,14 @@ def create_precision_route_from_gpx(file, use_procedure_turns: bool) -> Route:
     landing_gates = []
     takeoff_gates = []
     route_name = ""
+    corridor_width = 0
+    
+    for flightcontest in gpx.extensions:
+        route_settings = flightcontest.find("observationsettings")
+        if route_settings is not None:
+            route_name = route_settings.attrib["routetitle"]
+            corridor_width = float(route_settings.attrib["corridorwidth"])
+    
     for route in gpx.routes:
         for flightcontest in route.extensions:
             route_extension = flightcontest.find("route")
@@ -199,7 +207,6 @@ def create_precision_route_from_gpx(file, use_procedure_turns: bool) -> Route:
                 # for point in route.points:
                 # print('Point {3} at ({0},{1}) -> {2}'.format(point.latitude, point.longitude, point.elevation,
                 #                                              point.name))
-                route_name = route.name
                 logger.debug("Loading GPX route {}".format(route_name))
                 for point in route.points:
                     waypoint_map[point.name] = Waypoint(point.name)
@@ -256,6 +263,7 @@ def create_precision_route_from_gpx(file, use_procedure_turns: bool) -> Route:
         takeoff_gates=takeoff_gates,
         landing_gates=landing_gates,
         use_procedure_turns=use_procedure_turns,
+        corridor_width=corridor_width, 
     )
     object.save()
     return object
