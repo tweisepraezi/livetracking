@@ -31,6 +31,7 @@ def get_default_scorecard():
             "task_type": [PRECISION],
             "calculator": PRECISION,
             "prohibited_zone_penalty": 0,
+            "prohibited_zone_maximum": -1,
             "included_fields": [
                 [
                     "Backtracking",

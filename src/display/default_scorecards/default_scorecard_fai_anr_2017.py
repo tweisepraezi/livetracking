@@ -36,6 +36,7 @@ def get_default_scorecard():
             "below_minimum_altitude_penalty": 500,  # verified
             "below_minimum_altitude_maximum_penalty": 500,  # verified
             "prohibited_zone_penalty": 200,
+            "prohibited_zone_maximum": -1,
             "included_fields": [
                 [
                     "Corridor penalties",
