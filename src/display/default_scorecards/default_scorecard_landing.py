@@ -19,6 +19,7 @@ def get_default_scorecard():
             "task_type": [LANDING],
             "calculator": LANDING,
             "prohibited_zone_penalty": 0,
+            "prohibited_zone_maximum": -1,
         },
     )
 
@@ -34,7 +35,6 @@ def get_default_scorecard():
             "penalty_per_second": 0,
             "missed_penalty": 0,
             "missed_procedure_turn_penalty": 0,
-            "prohibited_zone_maximum": -1,
             "backtracking_after_steep_gate_grace_period_seconds": 0,
         },
     )

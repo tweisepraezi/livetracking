@@ -23,6 +23,7 @@ def get_default_scorecard():
             "task_type": [POKER],
             "calculator": POKER,
             "prohibited_zone_penalty": 0,
+            "prohibited_zone_maximum": -1,
             "free_text": """
 <p>The crew must follow the order of the waypoints to receive the next card.  To make the waypoint more accessible, polygons (Gate Zone) can be used in the route editor. Overlap the Gate Zone with the Turning Point, it will then be automatically connected as a waypoint.</p>
 
@@ -43,7 +44,6 @@ def get_default_scorecard():
             "penalty_per_second": 0,
             "missed_penalty": 0,
             "missed_procedure_turn_penalty": 0,
-            "prohibited_zone_maximum": -1,
             "backtracking_after_steep_gate_grace_period_seconds": 0,
         },
     )
