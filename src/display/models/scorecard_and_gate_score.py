@@ -80,7 +80,7 @@ class Scorecard(models.Model):
         help_text="The number of seconds the contestant can be within the prohibited zone before getting penalty",
     )
     prohibited_zone_maximum = models.FloatField(
-        default=3,
+        default=-1,
         help_text="The maximum score that can be given for entering prohibited zones. Negative numbers means the maximum is ignored",
     )
     penalty_zone_grace_time = models.FloatField(

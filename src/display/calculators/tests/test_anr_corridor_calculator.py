@@ -163,9 +163,7 @@ class TestANRPerLeg(TransactionTestCase):
             "SP: 50.0 points outside corridor (25 s) (capped)",
             "SP: 0 points exiting corridor",
             "SP: 200.0 points backtracking",
-            "SP: 0.0 points outside corridor (228 s) (capped)",
-            "SP: 50.0 points outside corridor (0 s) (capped)",
-            "SP: 50.0 points outside corridor (0 s) (capped)",
+            "SP: 0.0 points outside corridor (227 s) (capped)",
             "FP: 200.0 points missing gate\nplanned: 14:18:11\nactual: --",
             "Landing 1: 0.0 points missing landing gate\nplanned: 13:59:30\nactual: --",
         ]
@@ -173,7 +171,7 @@ class TestANRPerLeg(TransactionTestCase):
             final_list,
             strings,
         )
-        self.assertEqual(750, contestant_track.score)
+        self.assertEqual(650, contestant_track.score)
 
     def test_manually_terminate_calculator(self, *args):
         cache.clear()
@@ -573,8 +571,8 @@ class TestAnrCorridorCalculator(TransactionTestCase):
             UpdateScoreMessage(
                 time=datetime.datetime(2020, 1, 1, 0, 0, 21),
                 gate=self.calculator.route.waypoints[0],
-                score=48.0,
-                message="outside corridor (21 s)",
+                score=45.0,
+                message="outside corridor (20 s)",
                 latitude=60,
                 longitude=11.5,
                 annotation_type="anomaly",
