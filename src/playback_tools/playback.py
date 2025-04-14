@@ -202,6 +202,9 @@ def insert_gpx_file(contestant_object: "Contestant", file):
     contestant_object.save(update_fields=["track_version"])
     ContestantUploadedTrack.objects.create(contestant=contestant_object, track=positions)
     logger.debug("Created new uploaded track with {} positions".format(len(positions)))
+    if len(positions) == 0:
+        logger.debug("No positions, returning")
+        return
     queue_name = f"override_{contestant_object.pk}"
     q = RedisQueue(queue_name)
     while not q.empty():
