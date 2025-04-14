@@ -810,7 +810,10 @@ class ContestantSerialiser(serializers.ModelSerializer):
         except KeyError:
             raise Http404("Navigation task not found")
         validated_data["navigation_task"] = navigation_task
-        gate_times = validated_data.pop("gate_times", {})
+        validated_data["gate_times"] = {
+            key: dateutil.parser.parse(value) for key, value in validated_data["gate_times"].items()
+        }
+        # gate_times = validated_data.pop("gate_times", {})
         team = validated_data["team"]
         if contest_team := ContestTeam.objects.filter(contest=navigation_task.contest, team=team).first():
             if (
@@ -839,8 +842,8 @@ class ContestantSerialiser(serializers.ModelSerializer):
                 validated_data["air_speed"] = contest_team.air_speed
 
         contestant = Contestant.objects.create(**validated_data)
-        contestant.gate_times = {key: dateutil.parser.parse(value) for key, value in gate_times.items()}
-        contestant.save()
+        # contestant.gate_times = {key: dateutil.parser.parse(value) for key, value in gate_times.items()}
+        # contestant.save()
         if not ContestTeam.objects.filter(contest=contestant.navigation_task.contest, team=contestant.team).exists():
             ContestTeam.objects.create(
                 contest=contestant.navigation_task.contest,
